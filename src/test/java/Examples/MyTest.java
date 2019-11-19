@@ -1,9 +1,6 @@
 package Examples;
 
-import Example.FileRead;
-import Example.FileScanner;
-import Example.PropertyFileReader;
-import Example.XmlReader;
+import Example.*;
 import org.junit.*;
 import org.w3c.dom.Document;
 import java.io.IOException;
@@ -43,6 +40,8 @@ public class MyTest {
     @Test
     public void test_method_1() throws IOException, URISyntaxException {
         System.out.println("@Test - test_method_1");
+
+
 
         FileRead fileRead = new FileRead();
         String filename = "Test.txt";
@@ -101,9 +100,23 @@ public class MyTest {
         String filename = "config.xml";
 
         Document document = xmlReader.readXML(FileRead.pathToExternalSytemFolders +"/" + filename);
-        HashMap config = xmlReader.profileLoader(document, "French");
+        HashMap config = xmlReader.profileLoader(document, "tralala");
 
-        Assert.assertTrue(config.get("browser").equals("Firefox"));
+        Assert.assertTrue(config.get("browser").equals("Chrome"));
     }
+
+    @Test
+    public void test_method_6() throws Exception {
+        System.out.println("@Test - test_method_6");
+
+        InFileWriter inFileWriter = new InFileWriter();
+        String filename = "myFile.txt";
+        String content= "This is a test 2";
+
+        inFileWriter.writeFile(FileRead.pathToExternalSytemFolders +"/" + filename, content);
+        inFileWriter.writeLineToFile(FileRead.pathToExternalSytemFolders +"/" + filename, "New line");
+        inFileWriter.writeLineToFile(FileRead.pathToExternalSytemFolders +"/" + filename, "New line2");
+    }
+
 
 }

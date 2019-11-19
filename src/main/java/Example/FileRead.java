@@ -20,7 +20,6 @@ public class FileRead {
 
     public List<String> readFileLines(String pathToFile) throws IOException {
         Path path = Paths.get(pathToFile);
-        byte[] bytes = Files.readAllBytes(path);
         return Files.readAllLines( path, StandardCharsets.UTF_8 );
     }
 

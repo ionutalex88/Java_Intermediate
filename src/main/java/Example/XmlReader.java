@@ -22,14 +22,13 @@ public class XmlReader {
         Document doc = dBuilder.parse(fXmlFile);
 
         //optional, but recommended
-        //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
         doc.getDocumentElement().normalize();
 
         return doc;
     }
 
     public HashMap profileLoader(Document document, String requestedProfile) throws Exception {
-        boolean profileFound = true;
+        boolean profileFound = false;
         HashMap map = new HashMap();
 
         NodeList nList = document.getElementsByTagName("profile");
@@ -43,6 +42,8 @@ public class XmlReader {
                 if (profile.equals(requestedProfile)) {
 
                     System.out.println("Profile : " + profile);
+                    profileFound = true;
+
                     String homepage = eElement.getElementsByTagName("homepage").item(0).getTextContent();
                     map.put("homepage", homepage);
                     System.out.println("homepage : " + homepage);
@@ -59,6 +60,8 @@ public class XmlReader {
                 }
             }
         }
+
+
         if (!profileFound) {
             throw new Exception("Profile: " + requestedProfile + " NOT FOUND");
         }
